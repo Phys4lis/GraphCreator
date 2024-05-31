@@ -17,8 +17,6 @@ int main() {
       }
     } 
   }
-  board[2][1] = '3';
-  board[2][0] = '4';
   char letters[21];
   for (int i = 0; i < 20; i++) {
     letters[i] = '-';
@@ -50,25 +48,84 @@ int main() {
       char vertexOrigin;
       cin >> vertexOrigin;
       cin.get();
+      
       cout << "Please enter the vertex label of the destination." << endl;
       char vertexDestination;
       cin >> vertexDestination;
       cin.get();
+      
       cout << "What is the weight of the edge?" << endl;
       char edgeWeight;
       cin >> edgeWeight;
       cin.get();
 
-      // FIND INDICES (STRCMP), CHANGE BOARD
+      int indexOrigin;
+      int indexDestination;
       
+      for (int i = 0; i < vertexNums; i++) {
+	if (vertexOrigin == letters[i]) {
+	  indexOrigin = i;
+	}
+	if (vertexDestination == letters[i]) {
+	  indexDestination = i;
+	}
+      }
+
+      board[indexOrigin][indexDestination] = edgeWeight;      
     }
     // Remove vertex
     else if (option == 3) {
-      
+      cout << "Please enter the vertex label." << endl;
+      char vertexLabel;
+      cin >> vertexLabel;
+      cin.get();
+
+      int vertexIndex;
+      for (int i = 0; i < vertexNums; i++) {
+	if (vertexLabel == letters[i]) {
+	  vertexLabel = i;
+	}
+      }
+
+      for (int i = vertexLabel; i < vertexNums; i++) {
+	letters[i] = letters[i+1];
+      }
+      vertexNums--;
+
+      for (int i = 0; i < vertexNums; i++) {
+	for (int j = 0; j < vertexNums; j++) {
+	  if (i == vertexIndex || j == vertexIndex) {
+	    board[i][j] == ' ';
+	  }
+	}
+      }
+      board[vertexIndex][vertexIndex] = 0;
     }
     // Remove edge
     else if (option == 4) {
-    
+      cout << "Please enter the vertex label of the origin." << endl;
+      char vertexOrigin;
+      cin >> vertexOrigin;
+      cin.get();
+      
+      cout << "Please enter the vertex label of the destination." << endl;
+      char vertexDestination;
+      cin >> vertexDestination;
+      cin.get();
+
+      int indexOrigin;
+      int indexDestination;
+      
+      for (int i = 0; i < vertexNums; i++) {
+	if (vertexOrigin == letters[i]) {
+	  indexOrigin = i;
+	}
+	if (vertexDestination == letters[i]) {
+	  indexDestination = i;
+	}
+      }
+
+      board[indexOrigin][indexDestination] = ' ';
     }
     // Print
     else if (option == 5) {
