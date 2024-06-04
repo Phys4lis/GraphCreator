@@ -6,6 +6,7 @@ using namespace std;
 int correctInput();
 
 int main() {
+  // Create board and fill diagonals with 0's and blanks with spaces
   char board[21][21];
   for (int i = 0; i < 20; i++) {
     for (int j = 0; j < 20; j++) {
@@ -17,6 +18,7 @@ int main() {
       }
     } 
   }
+  // Create char array for vertex labels and fill with the char '-'
   char letters[21];
   for (int i = 0; i < 20; i++) {
     letters[i] = '-';
@@ -61,7 +63,8 @@ int main() {
 
       int indexOrigin;
       int indexDestination;
-      
+
+      // Find the indices of the origin and destination
       for (int i = 0; i < vertexNums; i++) {
 	if (vertexOrigin == letters[i]) {
 	  indexOrigin = i;
@@ -70,28 +73,32 @@ int main() {
 	  indexDestination = i;
 	}
       }
-
+      // Add to the appriopriate location in the board
       board[indexOrigin][indexDestination] = edgeWeight;      
     }
     // Remove vertex
     else if (option == 3) {
+      // DOESN'T FULLY WORK!!
       cout << "Please enter the vertex label." << endl;
       char vertexLabel;
       cin >> vertexLabel;
       cin.get();
 
       int vertexIndex;
+      // Find index for the deleted vertex
       for (int i = 0; i < vertexNums; i++) {
 	if (vertexLabel == letters[i]) {
 	  vertexLabel = i;
 	}
       }
 
+      // Shift the labels
       for (int i = vertexLabel; i < vertexNums; i++) {
 	letters[i] = letters[i+1];
       }
       vertexNums--;
 
+      // Fix the board (DOESN'T WORK)
       for (int i = 0; i < vertexNums; i++) {
 	for (int j = 0; j < vertexNums; j++) {
 	  if (i == vertexIndex || j == vertexIndex) {
@@ -115,7 +122,8 @@ int main() {
 
       int indexOrigin;
       int indexDestination;
-      
+
+      // Find indices for origin and destination
       for (int i = 0; i < vertexNums; i++) {
 	if (vertexOrigin == letters[i]) {
 	  indexOrigin = i;
@@ -124,12 +132,13 @@ int main() {
 	  indexDestination = i;
 	}
       }
-
+      // Remove edge
       board[indexOrigin][indexDestination] = ' ';
     }
     // Print
     else if (option == 5) {
       cout << endl;
+      // Print labels horizontally
       for (int i = 0; i < vertexNums; i++) {
 	if (i == 0) {
 	  cout << "    ";
@@ -137,6 +146,7 @@ int main() {
 	cout << letters[i] << "   ";
       }
       cout << endl;
+      // Print labels vertically as well as the board
       for (int i = 0; i < vertexNums; i++) {
 	cout << letters[i] << "   ";
 	for (int j = 0; j < vertexNums; j++) {
